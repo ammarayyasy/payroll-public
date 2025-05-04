@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('shift_id')->constrained('shifts')->cascadeOnDelete();
+            $table->foreignId('office_id')->constrained('offices')->cascadeOnDelete();
             $table->timestamps();
         });
     }
