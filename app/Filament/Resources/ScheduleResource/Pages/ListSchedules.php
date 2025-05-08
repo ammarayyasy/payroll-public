@@ -4,6 +4,7 @@ namespace App\Filament\Resources\ScheduleResource\Pages;
 
 use App\Filament\Resources\ScheduleResource;
 use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,9 @@ class ListSchedules extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+            Action::make('presensi')
+            ->url('/presensi')
+            ->color('warning'),
         ];
     }
     
