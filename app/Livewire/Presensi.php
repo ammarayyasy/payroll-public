@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Attendance;
 use App\Models\Schedule;
+use Filament\Notifications\Notification;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -57,10 +58,18 @@ class Presensi extends Component
                 ]);
             }
 
-            return redirect()->route('presensi', [
-                'schedule' => $schedule,
-                'insideRadius' => false
-            ]);
+            Notification::make()
+                ->title('Presensi Berhasil')
+                ->success()
+                ->body('Data presensi berhasil disimpan')
+                ->send();
+
+            return redirect('dashboard/attendances');
+
+            // return redirect()->route('presensi', [
+            //     'schedule' => $schedule,
+            //     'insideRadius' => false
+            // ]);
         }
     }
 }

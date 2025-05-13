@@ -64,6 +64,19 @@ class AttendanceResource extends Resource
                     ->label('Jam Masuk'),
                 Tables\Columns\TextColumn::make('end_time')
                     ->label('Jam Keluar'),
+                Tables\Columns\TextColumn::make('is_late')
+                    ->label('Status')
+                    ->getStateUsing(function (Attendance $record) {
+                        return $record->isLate() ? 'Terlambat' : 'Tepat Waktu';
+                    })
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Tepat Waktu' => 'success',
+                        'Terlambat' => 'danger',
+                    })
+                    ->description(function (Attendance $record) {
+                        return 'Durasi: ' . $record->workDuration();
+                    }),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()

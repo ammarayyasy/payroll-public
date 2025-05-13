@@ -27,6 +27,7 @@ class ScheduleResource extends Resource
                 ->schema([
                     Forms\Components\Section::make()
                     ->schema([
+                        Forms\Components\Toggle::make('is_banned'),
                         Forms\Components\Select::make('user_id')
                             ->relationship('user', 'name')
                             ->searchable()
@@ -60,6 +61,7 @@ class ScheduleResource extends Resource
                 Tables\Columns\TextColumn::make('office.name')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\ToggleColumn::make('is_banned'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
